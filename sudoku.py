@@ -1,6 +1,8 @@
 from copy import deepcopy
 import sys
-sys.setrecursionlimit(2000)
+import random
+
+sys.setrecursionlimit(10000)
 def start(puzzle):
     originalPuzzle = deepcopy(puzzle)
     currentSpot = nextOpenSpot(puzzle, 0, 0)
@@ -8,6 +10,7 @@ def start(puzzle):
     if final == None:
         print("impossible puzzle")
     else:
+        print("\nFinal Puzzle Solution:")
         printPuzzle(final)
 
 def solvePuzzle(puzzle, originalPuzzle, x, y, currNum):
@@ -86,6 +89,19 @@ def printPuzzle(puzzle):
                     print("---------------------------------")
             else:
                 print(puzzle[i][j], end=" | ")
+
+def randomBoardMaker():
+    puzzle = [ [0] * 9 for _ in range(9)]
+    numberSpots = random.randint(0, 10)
+    i = 0
+    while i < 10 + numberSpots:
+        nextSpot = (random.randint(0, 8), random.randint(0, 8))
+        nextNum = random.randint(0, 8)
+        if isValidNum(puzzle, nextSpot[0], nextSpot[1], nextNum):
+            puzzle[nextSpot[0]][nextSpot[1]] = nextNum
+            i += 1
+    printPuzzle(puzzle)
+    return puzzle
     
 
 puzzle = [[0,8,0,0,0,0,4,7,0],
@@ -97,4 +113,6 @@ puzzle = [[0,8,0,0,0,0,4,7,0],
           [0,0,0,0,0,0,0,8,0],
           [7,0,0,0,8,6,0,5,0],
           [0,0,0,7,0,0,9,0,3]]
-start(puzzle)
+
+randPuzzle = randomBoardMaker()
+start(randPuzzle)
