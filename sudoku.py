@@ -10,7 +10,7 @@ def start(puzzle):
     if final == None:
         print("impossible puzzle")
     else:
-        print("\nFinal Puzzle Solution:")
+        print("\n                   Final Puzzle Solution:")
         printPuzzle(final)
 
 def solvePuzzle(puzzle, originalPuzzle, x, y, currNum):
@@ -19,7 +19,7 @@ def solvePuzzle(puzzle, originalPuzzle, x, y, currNum):
         if newNum:
             puzzle[x][y] = newNum
         else:
-            if x == 0:     
+            if x == 0:
                 return backtrack(puzzle, originalPuzzle, 8, y - 1)
             return backtrack(puzzle, originalPuzzle, x - 1, y)
         x, y = nextOpenSpot(puzzle, x, y)
@@ -36,7 +36,7 @@ def backtrack(puzzle, originalPuzzle, x, y):
                 if x == 0:
                     return backtrack(puzzle, originalPuzzle, 8, y - 1)
                 return backtrack(puzzle, originalPuzzle, x - 1, y)
-            
+
             return solvePuzzle(puzzle, originalPuzzle, x, y, oldNum + 1)
         if x == 0:
             y -= 1
@@ -45,10 +45,10 @@ def backtrack(puzzle, originalPuzzle, x, y):
             x -= 1
     return None
 
-        
+
 def tryFromThisNum(puzzle, xPos, yPos, num):
     while num < 10:
-        if isValidNum(puzzle, xPos, yPos, num):           
+        if isValidNum(puzzle, xPos, yPos, num):
             return num
         num += 1
     return None
@@ -82,11 +82,12 @@ def isValidNum(puzzle, xPos, yPos, num):
 
 def printPuzzle(puzzle):
     for i in range(len(puzzle)):
+        print("                 ", end="")
         for j in range(len(puzzle)):
             if j == 8:
                 print(puzzle[i][j])
                 if i < 8:
-                    print("---------------------------------")
+                    print("                 ---------------------------------")
             else:
                 print(puzzle[i][j], end=" | ")
 
@@ -102,7 +103,7 @@ def randomBoardMaker():
             i += 1
     printPuzzle(puzzle)
     return puzzle
-    
+
 
 puzzle = [[0,8,0,0,0,0,4,7,0],
           [4,3,0,8,0,0,1,0,0],
